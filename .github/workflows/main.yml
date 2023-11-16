@@ -6,58 +6,12 @@ on:
 
 jobs:
 
-  tests:
-    uses: OpenAstronomy/github-actions-workflows/.github/workflows/tox.yml@main
-    with:
-      coverage: codecov
-      runs-on: |
-        linux: ubuntu-22.04
-      envs: |
-        - linux: py38-test-numpy118
-        - linux: py39-test-numpy119
-        - linux: py39-test-numpy120
-        - linux: py39-test-numpy121
-        - linux: py39-test-numpy122
-        - linux: py39-test-numpy123
-        - linux: py310-test-numpy124
-        - linux: py310-test-numpy125
-        - linux: py311-test-numpy126
-
-        - macos: py38-test-numpy118
-        - macos: py39-test-numpy119
-        - macos: py39-test-numpy120
-        - macos: py39-test-numpy121
-        - macos: py39-test-numpy122
-        - macos: py39-test-numpy123
-        - macos: py310-test-numpy124
-        - macos: py310-test-numpy125
-        - macos: py311-test-numpy126
-
-        - windows: py38-test-numpy118
-        - windows: py39-test-numpy119
-        - windows: py39-test-numpy120
-        - windows: py39-test-numpy121
-        - windows: py39-test-numpy122
-        - windows: py39-test-numpy123
-        - windows: py310-test-numpy124
-        - windows: py310-test-numpy125
-        - windows: py311-test-numpy126
-
   publish:
     uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish.yml@main
     with:
-      test_extras: test
-      test_command: pytest --pyargs fast_histogram -m "not hypothesis"
+      repository_url: https://test.pypi.org/legacy/
       sdist-runs-on: ubuntu-22.04
       targets: |
-        - cp*-manylinux_x86_64
-        - cp*-manylinux_aarch64
-        - cp*-musllinux_x86_64
-        # - cp*-musllinux_aarch64
-        - pp*-manylinux_x86_64
-        # - pp*-manylinux_aarch64
-        - cp*-macosx_x86_64
-        - cp*-macosx_arm64
-        - windows
+        - cp39-manylinux_x86_64
     secrets:
-      pypi_token: ${{ secrets.PYPI_TOKEN }}
+      pypi_token: ${{ secrets.TEST_PYPI_TOKEN }}
