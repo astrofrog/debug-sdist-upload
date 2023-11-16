@@ -7,7 +7,7 @@ on:
 jobs:
 
   publish:
-    uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish.yml@main
+    uses: astrofrog/github-actions-workflows/.github/workflows/publish.yml@fix-sdist-publish
     with:
       repository_url: https://test.pypi.org/legacy/
       sdist-runs-on: ubuntu-22.04
